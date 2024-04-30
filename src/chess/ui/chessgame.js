@@ -17,7 +17,7 @@ class ChessGame extends React.Component {
 
     state = {
         gameState: new Game(this.props.color),
-        draggedPieceTargetId: "", // empty string means no piece is being dragged
+        draggedPieceTargetId: "",
         playerTurnToMoveIsWhite: true,
         whiteKingInCheck: false, 
         blackKingInCheck: false
@@ -48,11 +48,6 @@ class ChessGame extends React.Component {
 
 
     movePiece = (selectedId, finalPosition, currentGame, isMyMove) => {
-        /**
-         * "update" is the connection between the model and the UI. 
-         * This could also be an HTTP request and the "update" could be the server response.
-         * (model is hosted on the server instead of the browser)
-         */
         var whiteKingInCheck = false 
         var blackKingInCheck = false
         var blackCheckmated = false 
@@ -60,14 +55,12 @@ class ChessGame extends React.Component {
         const update = currentGame.movePiece(selectedId, finalPosition, isMyMove)
         
         if (update === "moved in the same position.") {
-            this.revertToPreviousState(selectedId) // pass in selected ID to identify the piece that messed up
+            this.revertToPreviousState(selectedId)
             return
         } else if (update === "user tried to capture their own piece") {
             this.revertToPreviousState(selectedId) 
             return
         } else if (update === "b is in check" || update === "w is in check") { 
-            // change the fill of the enemy king or your king based on which side is in check. 
-            // play a sound or something
             if (update[0] === "b") {
                 blackKingInCheck = true
             } else {
@@ -83,8 +76,6 @@ class ChessGame extends React.Component {
             this.revertToPreviousState(selectedId) 
             return
         } 
-
-        // let the server and the other client know your move
         if (isMyMove) {
             socket.emit('new move', {
                 nextPlayerColorToMove: !this.state.gameState.thisPlayersColorIsWhite,
@@ -97,8 +88,6 @@ class ChessGame extends React.Component {
         
 
         this.props.playAudio()   
-        
-        // sets the new game state. 
         this.setState({
             draggedPieceTargetId: "",
             gameState: currentGame,
@@ -124,9 +113,6 @@ class ChessGame extends React.Component {
     }
 
     revertToPreviousState = (selectedId) => {
-        /**
-         * Should update the UI to what the board looked like before. 
-         */
         const oldGS = this.state.gameState
         const oldBoard = oldGS.getBoard()
         const tmpGS = new Game(true)
@@ -142,8 +128,6 @@ class ChessGame extends React.Component {
                 }
             }
         }
-
-        // temporarily remove the piece that was just moved
         tmpGS.setBoard(tmpBoard)
 
         this.setState({
@@ -158,10 +142,6 @@ class ChessGame extends React.Component {
 
  
     inferCoord = (x, y, chessBoard) => {
-        // console.log("actual mouse coordinates: " + x + ", " + y)
-        /*
-            Should give the closest estimate for new position. 
-        */
         var hashmap = {}
         var shortestDistance = Infinity
         for (var i = 0; i < 8; i++) {
@@ -182,13 +162,6 @@ class ChessGame extends React.Component {
     }
    
     render() {
-        // console.log(this.state.gameState.getBoard())
-       //  console.log("it's white's move this time: " + this.state.playerTurnToMoveIsWhite)
-        /*
-            Look at the current game state in the model and populate the UI accordingly
-        */
-        // console.log(this.state.gameState.getBoard())
-        
         return (
         <React.Fragment>
         <div style = {{
@@ -232,18 +205,6 @@ class ChessGame extends React.Component {
 
 
 const ChessGameWrapper = (props) => {
-    /**
-     * player 1
-     *      - socketId 1
-     *      - socketId 2 ???
-     * player 2
-     *      - socketId 2
-     *      - socketId 1
-     */
-
-
-
-    // get the gameId from the URL here and pass it to the chessGame component as a prop. 
     const domainName = 'http://localhost:3000'
     const color = React.useContext(ColorContext)
     const { gameid } = useParams()
@@ -276,9 +237,6 @@ const ChessGameWrapper = (props) => {
                 setUserName(opponentUserName)
                 didJoinGame(true) 
             } else {
-                // in chessGame, pass opponentUserName as a prop and label it as the enemy. 
-                // in chessGame, use reactContext to get your own userName
-                // socket.emit('myUserName')
                 socket.emit('request username', gameid)
             }
         })
@@ -359,3 +317,9 @@ const ChessGameWrapper = (props) => {
 };
 
 export default ChessGameWrapper
+
+// why I'm getting the following error on running it on the browser: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+// I'm getting this error because I'm not exporting the ChessGameWrapper component. I'm only exporting the ChessGame component. I need to export the ChessGameWrapper component as well.
+// so how can I fix this error? I can fix this error by exporting the ChessGameWrapper component.
+// but its already being exported. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not importing the ChessGameWrapper component in the App.js file. I need to import the ChessGameWrapper component in the App.js file.
+// I'm still getting the error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the

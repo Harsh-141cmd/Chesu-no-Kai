@@ -1,12 +1,6 @@
 import React from 'react'
 import JoinGame from './joingame'
 import ChessGame from '../chess/ui/chessgame'
-
-
-/**
- * Onboard is where we create the game room.
- */
-
 class JoinRoom extends React.Component {
     state = {
         didGetUserName: false,
@@ -19,10 +13,7 @@ class JoinRoom extends React.Component {
     }
 
     typingUserName = () => {
-        // grab the input text from the field from the DOM 
         const typedText = this.textArea.current.value
-        
-        // set the state with that text
         this.setState({
             inputText: typedText
         })
@@ -49,9 +40,6 @@ class JoinRoom extends React.Component {
                         style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                         disabled = {!(this.state.inputText.length > 0)} 
                         onClick = {() => {
-                            // When the 'Submit' button gets pressed from the username screen,
-                            // We should send a request to the server to create a new room with
-                            // the uuid we generate here.
                             this.setState({
                                 didGetUserName: true
                             })

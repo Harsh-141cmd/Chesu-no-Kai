@@ -102,17 +102,17 @@ function VideoChatApp(props) {
   }
 
   let UserVideo;
-  if (stream) {
+if (stream) {
     UserVideo = (
-      <Video playsInline muted ref={userVideo} autoPlay style = {{width: "50%", height: "50%"}} />
+        <Video playsInline muted ref={userVideo} autoPlay style = {{width: "50%", height: "50%", transform: "scaleX(-1)"}} />
     );
-  }
+}
 
   let mainView;
 
   if (callAccepted) {
     mainView = (
-      <Video playsInline ref={partnerVideo} autoPlay style = {{width: "100%", height: "100%"}} />
+      <Video playsInline ref={partnerVideo} autoPlay style = {{width: "50%", height: "50%", transform: "scaleX(-1)"}} />
     );
   } else if (receivingCall) {
     mainView = (

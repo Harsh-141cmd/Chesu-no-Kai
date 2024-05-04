@@ -8,6 +8,9 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Row = styled.div`
@@ -16,6 +19,9 @@ const Row = styled.div`
 
 const Video = styled.video`
   border: 1px solid blue;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 `;
 
 function VideoChatApp(props) {
@@ -102,23 +108,24 @@ function VideoChatApp(props) {
   }
 
   let UserVideo;
-if (stream) {
+  if (stream) {
     UserVideo = (
-        <Video playsInline muted ref={userVideo} autoPlay style = {{width: "50%", height: "50%", transform: "scaleX(-1)"}} />
+        <Video playsInline muted ref={userVideo} autoPlay style = {{width: "30%", height: "30%", transform: "scaleX(-1)", position: "absolute", bottom: "0", left: "0", boxSizing: "border-box"}} /> 
     );
 }
 
-  let mainView;
+let mainView;
 
-  if (callAccepted) {
+if (callAccepted) {
     mainView = (
-      <Video playsInline ref={partnerVideo} autoPlay style = {{width: "50%", height: "50%", transform: "scaleX(-1)"}} />
+      <Video playsInline ref={partnerVideo} autoPlay style = {{width: "30%", height: "30%", transform: "scaleX(-1)", position: "absolute", top: "0", left: "0", boxSizing: "border-box"}} />
     );
-  } else if (receivingCall) {
+  }
+   else if (receivingCall) {
     mainView = (
       <div>
         <h1>{props.opponentUserName} is calling you</h1>
-        <button onClick={acceptCall}><h1>Accept</h1></button>
+        <button onClick={acceptCall} style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}><h1>Accept</h1></button>
       </div>
     )
   } else if (isCalling) {
@@ -131,7 +138,7 @@ if (stream) {
     mainView = (
       <button onClick = {() => {
         callPeer(props.opponentSocketId)
-      }}><h1>Chat with your friend while you play!</h1></button>
+      }} style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}><h1>Chat with your friend while you play!</h1></button>
     )
   }
 

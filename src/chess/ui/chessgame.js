@@ -167,7 +167,11 @@ class ChessGame extends React.Component {
         <div style = {{
             backgroundImage: `url(${Board})`,
             width: "720px",
-            height: "720px"}}
+            height: "720px",
+            position: "relative", 
+            left: "30%", 
+            top: "50%", // Centered vertically
+        }}
         >
             <Stage width = {720} height = {720}>
                 <Layer>
@@ -317,9 +321,3 @@ const ChessGameWrapper = (props) => {
 };
 
 export default ChessGameWrapper
-
-// why I'm getting the following error on running it on the browser: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
-// I'm getting this error because I'm not exporting the ChessGameWrapper component. I'm only exporting the ChessGame component. I need to export the ChessGameWrapper component as well.
-// so how can I fix this error? I can fix this error by exporting the ChessGameWrapper component.
-// but its already being exported. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not importing the ChessGameWrapper component in the App.js file. I need to import the ChessGameWrapper component in the App.js file.
-// I'm still getting the error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the ChessGameWrapper component. I'm not sure why I'm getting this error. I think I'm getting this error because I'm not exporting the ChessGameWrapper component. I need to export the

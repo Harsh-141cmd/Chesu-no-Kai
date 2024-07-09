@@ -1,5 +1,4 @@
 {
-  
   "name": "chess-game",
   "version": "0.1.0",
   "private": true,
@@ -10,6 +9,7 @@
     "axios": "^1.6.7",
     "buffer": "^6.0.3",
     "chess.js": "^0.10.3",
+    "firebase": "^10.11.1",
     "konva": "6.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -45,5 +45,9 @@
   },
   "devDependencies": {
     "react-scripts": "^5.0.1"
-  }
+  },
+  "description": "- \"Chesu no Kai,\" which translates to \"Chess with Friends\" in Japanese. - It's an online chess platform that not only allows users to play chess with friends but also supports video calls and chat simultaneously, enhancing the interactive gaming experience. The platform includes features such as live chess gameplay, video communication, and a chat system, making it a comprehensive social gaming experience. - Users can play their friends anonymously via link. - Tech stack: React, Node.js, Express, Socket.IO, WebRTC",
+  "main": "index.js",
+  "author": "devTech",
+  "license": "ISC"
 }
